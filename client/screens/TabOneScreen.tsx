@@ -1,6 +1,7 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import { Button, NativeSyntheticEvent, StyleSheet, TextInput } from 'react-native';
+import { Button, ScrollView, StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import axios from 'axios'
+import { colors } from '../lib/colors';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -12,7 +13,7 @@ interface IProduct {
 
 export default function TabOneScreen() {
   const [text, setText] = useState('')
-  const [number, setNumber] = useState<Number | null>(null)
+  const [number, setNumber] = useState('')
   const [products, setProducts] = useState([])
 
   const handleCreatePurchase = async () => {
@@ -24,37 +25,41 @@ export default function TabOneScreen() {
     }).catch((e) => 
       console.log(e)
     )
-    await axios.get('http://127.0.0.1:3002/items')
-    .then((res) => {
-      console.log({res})
-      if (res) {
-        setProducts(res.data)
-      }
-    })
-    .catch((err) => {
-      console.log('error occured', err);
-    });
+    await handleFetchPurchases()
   }
 
+  const handleFetchPurchases = useCallback(async () => {
+    try {
+      const purchases = await axios.get('http://127.0.0.1:3002/items')
+      setProducts(purchases.data)
+    } catch(error) { 
+      console.log('error occured with fetching', error);
+    };
+    }, [setProducts])
+
+  useEffect(() => {
+    handleFetchPurchases()
+  }, [])
 
   return (
     <>
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.scrollView}>
+      {products.map((product: IProduct, index: number) => 
+      <View key={index} style={styles.purchaseItem}>
+        <Text>{product.title}</Text>
+        <Text>{product.price + '円'}</Text>
+        </View>
+      )}
+    </ScrollView>
+      </SafeAreaView>
     <View style={styles.inputContainer}>
       <TextInput style={styles.input} value={text} placeholder='項目名' onChangeText={setText}/>
       <TextInput style={styles.input} value={number} placeholder='価格' onChangeText={setNumber} keyboardType="numeric"/>
-      <Button title='Add' onPress={() => handleCreatePurchase()}/>
       </View>
-    <View>
-      {products.map((product: IProduct, index: number) => 
-      <View key={index}>
-        <Text>{index}</Text>
-        <Text>{product.title}</Text>
-        <Text>{product.price}</Text>
-        </View>
-      )}
-    </View>
-    </View>
+      <View style={styles.btnContainer}>
+        <Button color={colors.text.black} title='Add' onPress={() => handleCreatePurchase()}/>
+      </View>
       </>
   );
 }
@@ -63,7 +68,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
+  },
+  scrollView: {
+    width: '100%',
   },
   input: {
     fontSize: 20,
@@ -79,4 +87,18 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  btnContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: colors.primary[500],
+    borderRadius: 20
+  },
+  purchaseItem: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    margin: 4,
+    padding: 2,
+    backgroundColor: colors.primary[50]
+  }
 });
