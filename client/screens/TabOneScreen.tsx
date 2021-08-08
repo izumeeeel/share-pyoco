@@ -1,10 +1,12 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import { Button, ScrollView, StyleSheet, TextInput, SafeAreaView } from 'react-native';
+import Modal from 'react-native-modal'
 import axios from 'axios'
 import { colors } from '../lib/colors';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import fonts from '../lib/fonts';
 
 interface IProduct {
   title: string;
@@ -37,6 +39,11 @@ export default function TabOneScreen() {
     };
     }, [setProducts])
 
+  const [openModal, setOpenModal] = useState(false)
+  const handleOpenModal = () => setOpenModal(true)
+
+  const [commonExpense, setCommonExpense] = useState(0)
+
   useEffect(() => {
     handleFetchPurchases()
   }, [])
@@ -58,13 +65,85 @@ export default function TabOneScreen() {
       <TextInput style={styles.input} value={number} placeholder='価格' onChangeText={setNumber} keyboardType="numeric"/>
       </View>
       <View style={styles.btnContainer}>
-        <Button color={colors.text.black} title='Add' onPress={() => handleCreatePurchase()}/>
+        <Button color={colors.text.black} title='Add' onPress={handleCreatePurchase}/>
       </View>
+      <View style={styles.btnContainer}>
+        <Button color={colors.text.black} title='Open' onPress={handleOpenModal}/>
+      </View>
+      <SlideModal
+        visible={openModal}
+        setOpenModal={setOpenModal}
+      >
+        <ExpenseForm
+          commonExpense={commonExpense}
+          setCommonExpense={setCommonExpense}
+        />
+      </SlideModal>
       </>
   );
 }
 
+interface ISlideModal {
+  visible: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SlideModal: React.FC<ISlideModal> = ({visible, setOpenModal, children}) => {
+  const handelCloseModal = () => {
+    setOpenModal(false)
+  }
+  return (
+    <Modal
+      swipeDirection='down'
+      isVisible={visible}
+      onSwipeComplete={handelCloseModal}
+      style={styles.modal}
+    >
+      {children}
+    </Modal>
+  )
+}
+
+interface IExpenseForm {
+  commonExpense: number,
+  setCommonExpense: React.Dispatch<React.SetStateAction<number>>; 
+}
+
+const ExpenseForm: React.FC<IExpenseForm> = ({commonExpense, setCommonExpense}) => {
+  return (
+    <View style={styles.expenseContainer}>
+    <View　style={styles.expenseTitleContainer}>
+      <Text style={styles.expenseTitle}>¥</Text>
+      <TextInput
+        style={styles.expenseTitle}
+        keyboardType='numeric'
+        value={commonExpense.toString()}
+        onChangeText={setCommonExpense}
+      />
+    </View>
+  </View>
+  )
+}
+
 const styles = StyleSheet.create({
+  modal: {
+    margin: 0
+  },
+  expenseContainer: {
+    flex: 1,
+    paddingTop: 36,
+    paddingHorizontal: 24
+  },
+  expenseTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 24
+  },
+  expenseTitle: {
+    fontSize: fonts.size.exLarge,
+    fontWeight: fonts.weight.bold,
+    textAlign: 'right'
+  },
   container: {
     flex: 1,
     alignItems: 'center',
