@@ -12,14 +12,9 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Expence: {
             screens: {
-              TabOneScreen: 'one',
-            },
-          },
-          TabTwo: {
-            screens: {
-              TabTwoScreen: 'two',
+              Expences: 'years/:year',
             },
           },
         },
