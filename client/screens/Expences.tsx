@@ -44,7 +44,7 @@ export default function Expences() {
       {years.map(year => 
       <View key={year.year}>
         <Row 
-          leftText={year.year.toString()}
+          leftText={year.year.toString()+'年'}
           rightText={'¥' + year.totalExpence}
           onPress={() => navigation.navigate('ExpencesMonths', {
             screen: 'Expences',

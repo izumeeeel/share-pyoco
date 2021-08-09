@@ -5,15 +5,16 @@
  */
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
 
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
-import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import Expences from '../screens/Expences';
 import ExpencesMonths from '../screens/ExpencesMonths';
+import ExpencesMonth from '../screens/ExpencesMonth';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -33,7 +34,8 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }}>
       <Stack.Screen name="Expences" component={Expences} options={{ title: '支出合計' }}/>
-      <Stack.Screen name="ExpencesMonths" component={ExpencesMonths} options={{ title: '月' }}/>
+      <Stack.Screen name="ExpencesMonths" component={ExpencesMonths} options={(route) => ({title: route.route.params?.year + '年'})}/>
+      <Stack.Screen name="ExpencesMonth" component={ExpencesMonth} options={(route) => ({title: route.route.params?.month + '月'})}/>
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

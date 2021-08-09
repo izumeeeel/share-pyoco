@@ -5,7 +5,8 @@
 
 export type RootStackParamList = {
   Expences: undefined;
-  ExpencesMonths: undefined;
+  ExpencesMonths: {year: string};
+  ExpencesMonth: {month: string};
   NotFound: undefined;
 };
 
@@ -14,9 +15,6 @@ export type BottomTabParamList = {
   TabTwo: undefined;
 };
 
-export type TabOneParamList = {
-  TabOneScreen: undefined;
-};
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;

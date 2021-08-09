@@ -1,7 +1,8 @@
 import React from 'react';
 import { ScrollView, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// import { useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+
 import { View } from '../components/Themed';
 import { Row } from '../components/molecules/Row';
 
@@ -10,41 +11,45 @@ interface IProduct {
   price: number;
 }
 
-const months = [
+const expences = [
   {
-    month: 5,
-    totalExpence: 24600,
+    id: 0,
+    title: 'ハナマサ',
+    expence: 5460,
   }, 
   {
-    month: 6,
-    totalExpence: 25100,
-  },
-  {
-    month: 7,
-    totalExpence: 22900,
+    id: 1,
+    title: 'ABAB',
+    expence: 6460,
   }, 
   {
-    month: 8,
-    totalExpence: 23500,
+    id: 2,
+    title: 'Spotify',
+    expence: 1200,
+  }, 
+  {
+    id: 3,
+    title: '電気',
+    expence: 2460,
   }, 
 ]
 
 export default function Expences() {
   const navigation = useNavigation()
-  // const route = useRoute()
+  const route = useRoute()
   return (
     <>
     <SafeAreaView style={styles.container}>
     <ScrollView style={styles.scrollView}>
       <>
-      {months.map(month => 
-      <View key={month.month}>
+      {expences.map(expence => 
+      <View key={expence.id}>
         <Row 
-          leftText={month.month.toString() + '月'}
-          rightText={'¥' + month.totalExpence}
-          onPress={() => navigation.navigate('ExpencesMonth', {
+          leftText={expence.title}
+          rightText={'¥' + expence.expence}
+          onPress={() => navigation.navigate('Expences', {
             screen: 'Expences',
-            month: month.month
+            expence: expence.id
           })}
         />
         </View>
