@@ -22,7 +22,7 @@ export const colors = {
   },
   bg: {
     white: '#F7F7F8',
-    black: '#303030',
+    black: '#303030'
   },
   white: '#ffffff'
 } as const

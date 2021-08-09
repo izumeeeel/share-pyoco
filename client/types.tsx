@@ -4,18 +4,17 @@
  */
 
 export type RootStackParamList = {
-  Expences: undefined;
-  ExpencesMonths: {year: string};
-  ExpencesMonth: {month: string};
-  NotFound: undefined;
-};
+  Expences: undefined
+  ExpencesMonths: { year: string }
+  ExpencesMonth: { month: string }
+  NotFound: undefined
+}
 
 export type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
-};
-
+  TabOne: undefined
+  TabTwo: undefined
+}
 
 export type TabTwoParamList = {
-  TabTwoScreen: undefined;
-};
+  TabTwoScreen: undefined
+}

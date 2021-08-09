@@ -1,4 +1,4 @@
-import { TextStyle } from "react-native";
+import { TextStyle } from 'react-native'
 
 export default {
   size: {
@@ -8,6 +8,6 @@ export default {
     small: 12
   },
   weight: {
-    bold: "900" as TextStyle['fontWeight']
+    bold: '900' as TextStyle['fontWeight']
   }
 }

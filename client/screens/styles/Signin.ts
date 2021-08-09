@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../../lib/colors';
-import fonts from '../../lib/fonts';
+import { StyleSheet } from 'react-native'
+import { colors } from '../../lib/colors'
+import fonts from '../../lib/fonts'
 
 const width = 280
 export default StyleSheet.create({
@@ -42,8 +42,8 @@ export default StyleSheet.create({
     marginTop: 44,
     borderRadius: 20,
     shadowColor: colors.bg.black,
-    shadowOffset: {width: 4, height: 4},
-    shadowOpacity: .2,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.2,
     width
   }
-});
+})
