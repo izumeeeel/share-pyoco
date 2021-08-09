@@ -1,10 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { colors } from '../../lib/colors';
 import fonts from '../../lib/fonts';
-import { Text, View } from '../Themed'
-import { AntDesign } from '@expo/vector-icons';
+import { IconAntDesign, Text, View } from '../Themed'
 
 interface IRow {
   leftText: string;
@@ -27,7 +24,7 @@ export const Row: React.FC<IRow> = ({leftText, rightText, onPress}) => {
           </Text>
         </View>
         <View style={styles.chevron}>
-          <AntDesign name="right" size={16} color="black" />
+          <IconAntDesign name="right" color="black"/>
         </View>
       </View>
     </TouchableOpacity>

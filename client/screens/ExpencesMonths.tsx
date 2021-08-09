@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, SafeAreaView, Text } from 'react-native';
+import { ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // import { useRoute } from '@react-navigation/native';
 import { View } from '../components/Themed';
