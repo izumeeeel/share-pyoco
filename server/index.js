@@ -31,10 +31,10 @@ app.post('/create', (req, res) => {
   )
 })
 
-app.get('/items', (req, res) => {
+app.get('/expences', (req, res) => {
   console.log('get')
   db.query(
-    'SELECT * FROM share_pyoco.items;',
+    'SELECT * FROM share_pyoco.expence;',
     (err, result) => {
       if (err) {
         console.log(err)

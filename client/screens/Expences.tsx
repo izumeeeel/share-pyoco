@@ -1,9 +1,10 @@
 import React from 'react'
-import { ScrollView, StyleSheet, SafeAreaView } from 'react-native'
+import { ScrollView, StyleSheet, SafeAreaView, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { View } from '../components/Themed'
 import { Row } from '../components/molecules/Row'
+import { useExpences } from '../hooks/useExpences'
 
 const years = [
   {
@@ -26,6 +27,10 @@ const years = [
 
 const Expences: React.FC = () => {
   const navigation = useNavigation()
+  const fetchedExpences = useExpences()
+
+  console.log()
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -45,6 +50,7 @@ const Expences: React.FC = () => {
                 />
               </View>
             ))}
+            <Text>{JSON.stringify(fetchedExpences)}</Text>
           </>
         </ScrollView>
       </SafeAreaView>
