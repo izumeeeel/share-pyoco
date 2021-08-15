@@ -1,5 +1,7 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "__generated__/AppEntry.js",
+  "name": "client",
+  "version": "1.0.0",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -7,7 +9,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "lint": "eslint . --ext .tsx --ext .ts --fix"
+    "lint": "eslint . --ext .tsx --ext .ts --fix",
+    "postinstall": "expo-yarn-workspaces postinstall"
   },
   "jest": {
     "preset": "jest-expo"
@@ -22,6 +25,7 @@
     "@react-navigation/native": "~5.8.10",
     "@react-navigation/stack": "~5.12.8",
     "axios": "^0.21.1",
+    "cross-env": "5.0.5",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "expo": "~41.0.1",
@@ -53,6 +57,7 @@
     "@typescript-eslint/parser": "^4.29.0",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.24.0",
+    "expo-yarn-workspaces": "^1.5.2",
     "jest-expo": "~41.0.0",
     "typescript": "~4.0.0"
   },
