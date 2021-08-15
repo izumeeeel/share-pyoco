@@ -12,9 +12,9 @@ export default {
     screens: {
       Root: {
         screens: {
-          Expence: {
+          Expense: {
             screens: {
-              Expences: 'years/:year'
+              Expenses: 'years/:year'
             }
           }
         }
