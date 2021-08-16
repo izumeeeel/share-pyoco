@@ -1,13 +1,17 @@
 import useSWR from 'swr'
-import { IFetchedExpense } from '../../types/expenses'
+import { IFetchedSpanExpense, Span } from '../../types/expenses'
 import * as api from '../lib/api/expenses'
 
 interface IUseExpenses {
-  data: IFetchedExpense[] | undefined
+  data: IFetchedSpanExpense[] | undefined
 }
 
-export const useExpenses = (): { data: IUseExpenses | undefined } => {
-  const { data } = useSWR('/expenses', () => api.expenses.fetchAll())
+export const useExpenses = (
+  span: Span | undefined
+): { data: IUseExpenses | undefined } => {
+  const { data } = useSWR(`/expenses:${span}`, () =>
+    api.expenses.fetchAll(span)
+  )
   return {
     data
   }

@@ -12,11 +12,15 @@ declare namespace Expense {
   }
 
   interface INumberDateExpense extends IFetchedExpense{
-    createdAt: number,
+    createdYear: number,
+    createdMonth: number,
   }
 
-  interface IFetchedYearlyExpense{
-    year: number,
+  type IFetchedSpanExpense =
+  {
+    span: number,
     totalExpense: number,
   }
+
+  type Span = 'year' | 'month'
 }

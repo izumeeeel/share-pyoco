@@ -4,48 +4,33 @@ import { useNavigation } from '@react-navigation/native'
 // import { useRoute } from '@react-navigation/native';
 import { View } from '../components/Themed'
 import { Row } from '../components/molecules/Row'
-
-const months = [
-  {
-    month: 5,
-    totalExpense: 24600
-  },
-  {
-    month: 6,
-    totalExpense: 25100
-  },
-  {
-    month: 7,
-    totalExpense: 22900
-  },
-  {
-    month: 8,
-    totalExpense: 23500
-  }
-]
+import { useExpenses } from '../hooks/useExpenses'
 
 const Expenses: React.FC = () => {
   const navigation = useNavigation()
+  const fetchedExpenses = useExpenses('year').data
+  console.log({ fetchedExpenses })
   // const route = useRoute()
   return (
     <>
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <>
-            {months.map((month) => (
-              <View key={month.month}>
-                <Row
-                  leftText={month.month.toString() + '月'}
-                  rightText={`¥${month.totalExpense}`}
-                  onPress={() =>
-                    navigation.navigate('ExpensesMonth', {
-                      screen: 'Expenses',
-                      month: month.month
-                    })
-                  }
-                />
-              </View>
-            ))}
+            {fetchedExpenses?.data &&
+              fetchedExpenses.data['2021'].monthlyExpenses.map((expense) => (
+                <View key={expense.span}>
+                  <Row
+                    leftText={expense.span.toString() + '月'}
+                    rightText={`¥${expense.totalExpense}`}
+                    onPress={() =>
+                      navigation.navigate('ExpensesMonth', {
+                        screen: 'Expenses',
+                        month: expense.span
+                      })
+                    }
+                  />
+                </View>
+              ))}
           </>
         </ScrollView>
       </SafeAreaView>

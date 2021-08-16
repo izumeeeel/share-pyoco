@@ -6,33 +6,31 @@ import _ from 'lodash'
 import { View } from '../components/Themed'
 import { Row } from '../components/molecules/Row'
 import { useExpenses } from '../hooks/useExpenses'
-import { IFetchedYearlyExpense } from '../../types/expenses'
 
 const Expenses: React.FC = () => {
   const navigation = useNavigation()
-  const fetchedExpenses = useExpenses().data
-
+  const fetchedExpenses = useExpenses('year').data
+  console.log({ fetchedExpenses })
   return (
     <>
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <>
             {fetchedExpenses?.data &&
-              fetchedExpenses.data.map((year) => (
-                <View key={year.year}>
+              fetchedExpenses.data.map((expense) => (
+                <View key={expense}>
                   <Row
-                    leftText={year.year.toString() + '年'}
-                    rightText={`¥${year.totalExpense}`}
+                    leftText={expense.year.toString() + '年'}
+                    rightText={`¥${expense.totalExpense}`}
                     onPress={() =>
                       navigation.navigate('ExpensesMonths', {
                         screen: 'Expenses',
-                        year: year.year
+                        year: expense.year
                       })
                     }
                   />
                 </View>
               ))}
-            <Text>{JSON.stringify(fetchedExpenses)}</Text>
           </>
         </ScrollView>
       </SafeAreaView>
