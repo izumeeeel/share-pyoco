@@ -1,6 +1,6 @@
 import express from 'express'
 import { sequelize } from '../models';
-import { findExpenses } from '../helper/expense';
+import { findYealyExpenses } from '../helper/expense';
 import { createApiError } from '../lib/api-error';
 
 const router = express.Router();
@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     console.log('get from route')
-    const sqlResults = await findExpenses();
+    const sqlResults = await findYealyExpenses();
     const expenses = sqlResults;
     return res.status(200).json(expenses)
   } catch(error) {

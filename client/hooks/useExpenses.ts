@@ -1,10 +1,14 @@
 import useSWR from 'swr'
+import { IFetchedExpense } from '../../types/expenses'
 import * as api from '../lib/api/expenses'
 
-export const useExpenses = () => {
-  const { data, error } = useSWR('/expenses', () => api.expenses.fetchAll())
+interface IUseExpenses {
+  data: IFetchedExpense[] | undefined
+}
+
+export const useExpenses = (): { data: IUseExpenses | undefined } => {
+  const { data } = useSWR('/expenses', () => api.expenses.fetchAll())
   return {
-    data,
-    isError: !!error
+    data
   }
 }
