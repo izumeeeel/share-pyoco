@@ -13,7 +13,7 @@ const NotFoundScreen: React.FC<INotFound> = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>This screen doesn`&apos`t exist.</Text>
       <TouchableOpacity
-        onPress={() => navigation.navigation.navigate('Expences')}
+        onPress={() => navigation.navigation.navigate('Expenses')}
         style={styles.link}
       >
         <Text style={styles.linkText}>Go to home screen!</Text>

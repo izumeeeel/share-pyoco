@@ -4,9 +4,9 @@
  */
 
 export type RootStackParamList = {
-  Expences: undefined
-  ExpencesMonths: { year: string }
-  ExpencesMonth: { month: string }
+  Expenses: undefined
+  ExpensesMonths: { year: string }
+  ExpensesMonth: { month: string }
   NotFound: undefined
 }
 

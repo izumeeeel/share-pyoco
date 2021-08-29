@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "noImplicitAny": false
+    // tsconfig-pathsを試したがpathsの解決がうまくいかなかった
+    // https://github.com/dividab/tsconfig-paths/issues/93
+    // "paths": {
+    //   "~/*": ["./*"],
+    //   "*": ["types/*"]
+    // }
+  },
+  "include": ["**/*.ts", "**/*.js"],
+  // ts-jestのエラー回避のためbuildをexclude
+  // cf. https://github.com/kulshekhar/ts-jest/issues/2350
+  // TODO: ディレクトリ整理(app配下にAPIのコードを置く)
+  "exclude": ["node_modules", "dist", "./tools", "./serverless"]
+}

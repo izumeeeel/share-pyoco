@@ -15,9 +15,9 @@ import { ColorSchemeName } from 'react-native'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import { RootStackParamList } from '../types'
 import LinkingConfiguration from './LinkingConfiguration'
-import Expences from '../screens/Expences'
-import ExpencesMonths from '../screens/ExpencesMonths'
-import ExpencesMonth from '../screens/ExpencesMonth'
+import Expenses from '../screens/Expenses'
+import ExpensesMonths from '../screens/ExpensesMonths'
+import ExpensesMonth from '../screens/ExpensesMonth'
 
 export default function Navigation({
   colorScheme
@@ -42,18 +42,18 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }}>
       <Stack.Screen
-        name='Expences'
-        component={Expences}
+        name='Expenses'
+        component={Expenses}
         options={{ title: '支出合計' }}
       />
       <Stack.Screen
-        name='ExpencesMonths'
-        component={ExpencesMonths}
+        name='ExpensesMonths'
+        component={ExpensesMonths}
         options={(route) => ({ title: route.route.params?.year + '年' })}
       />
       <Stack.Screen
-        name='ExpencesMonth'
-        component={ExpencesMonth}
+        name='ExpensesMonth'
+        component={ExpensesMonth}
         options={(route) => ({ title: route.route.params?.month + '月' })}
       />
       <Stack.Screen
