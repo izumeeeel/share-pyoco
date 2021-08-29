@@ -16,7 +16,6 @@ const db = mysql.createConnection({
 })
 
 app.post('/create', (req, res) => {
-  console.log('api')
   const title = req.body.title;
   const price = req.body.price;
 
